@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -90,6 +90,258 @@
 
         } function deletee() {
             event.target.closest(".par").remove()
+        }
+    </script>
+</body>
+
+</html>
+-->
+//updated
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple To-Do List</title>
+    <style>
+        body {
+            background-color: #e0f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #004d40;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #00796b;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 600;
+            color:whitesmoke
+        }
+
+        header img {
+            width: 50px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .in, .result {
+            width: 90%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .in {
+            background-color: #ffebee;
+        }
+
+        .result {
+            background-color: #e8f5e9;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 10px 0;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        h1:hover {
+            color: #ff5722;
+            transform: scale(1.1);
+        }
+
+        .inp {
+            width: 70%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .sn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .sn:hover {
+            background-color: #388e3c;
+            transform: scale(1.05);
+        }
+
+        .sn img {
+            width: 22px;
+            margin-right: 8px;
+        }
+
+        .par {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            background-color: #fafafa;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .pppp {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .addele {
+            display: flex;
+            align-items: center;
+        }
+
+        .che {
+            margin-right: 12px;
+        }
+
+        .che:hover {
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #d32f2f;
+        }
+
+        button img {
+            width: 18px;
+            margin-right: 6px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        footer img {
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 style="">My To-Do List</h1>
+    </header>
+
+    <div class="container">
+        <div class="in">
+            <h1>To-Do List</h1>
+            <div style="display: flex; justify-content: center;">
+                <input type="text" class="inp" placeholder="Enter new task">
+                <input type="button" value="Add Task" onclick="add()" class="sn">
+            </div>
+        </div>
+        <div class="result">
+            <h1>Your List</h1>
+            <table id="taskList" style="width: 100%; border-collapse: collapse;">
+                <!-- Task items will be appended here -->
+            </table>
+        </div>
+        <footer>
+            All rights reserved @2024 To-Do List.com
+            
+        </footer>
+    </div>
+
+    <script>
+        function add() {
+            var inpele = document.querySelector(".inp");
+            var taskList = document.querySelector("#taskList");
+            if (inpele.value.trim() === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            var row = document.createElement("tr");
+            row.innerHTML = `
+                <td style="padding: 12px; border-bottom: 1px solid #ddd;">
+                    <p class="par">
+                        <span class="pppp">${inpele.value}</span>
+                        <span class="addele">
+                            <input type="checkbox" class="che">
+                            <button onclick="deleteTask(event)">
+                                <img src="https://via.placeholder.com/16x16?text=🗑️" alt="Delete Icon">Delete
+                            </button>
+                        </span>
+                    </p>
+                </td>
+            `;
+            taskList.appendChild(row);
+
+            inpele.value = "";
+        }
+
+        function deleteTask(event) {
+            event.target.closest("tr").remove();
         }
     </script>
 </body>
